@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container right-panel-active">
+        <!-- Sign Up -->
+        <div class="container__form container--signup">
+            {% if err_msg != null %}
+                <span style="color: red;">{{ err_msg }}</span>
+            {% endif %}
+
+            <form action="/user/register" method="post" class="form" id="form1">
+                <h2 class="form__title">注册</h2>
+                
+                <input type="text" name="username" placeholder="用户名" class="input" />
+                <input type="password" name="password" placeholder="密码" class="input"  id=""/>
+                <input type="password" name="rePassword" placeholder="重复密码" class="input" id=""/>
+                <input type="email" name="email" placeholder="邮箱" class="input" id=""/>
+                <input type="text" name="tel" placeholder="手机号码" class="input" />
+                <input type="text" name="birthdate" placeholder="生日" class="input" />
+
+                <input type="submit" value="注册" class="btn" /> 
+            
+            </form>
+        </div>
+
+        <!-- Overlay -->
+        <div class="container__overlay">
+            <div class="overlay">
+                <div class="overlay__panel overlay--left">
+                    <button class="btn" id="signIn" onclick="window.location.href='login'">登录</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

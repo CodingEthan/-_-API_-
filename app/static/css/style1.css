@@ -1,0 +1,26 @@
+.border-radius-25 {
+    border-radius: 25px;
+  }
+
+  .rounded-image {
+    border-radius: 25px;
+  }
+  .col-center-block {
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+label[for] {
+  /* 添加转换动画效果 */
+  transition: transform 0.2s;
+}
+
+input[type="radio"]:checked + label[for] {
+  /* 添加选中动画效果 */
+  transform: scale(1.2);
+}

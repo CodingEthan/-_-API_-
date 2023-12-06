@@ -1,0 +1,196 @@
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="/static/css/style1.css">
+  <style>
+    .border-radius-25 {
+      border-radius: 25px;
+    }
+
+    .rounded-image {
+      border-radius: 25px;
+    }
+
+    .col-center-block {
+      position: absolute;
+      top: 50%;
+      -webkit-transform: translateY(-50%);
+      -moz-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+      -o-transform: translateY(-50%);
+      transform: translateY(-50%);
+    }
+
+    label[for] {
+      /* 添加转换动画效果 */
+      transition: transform 0.2s;
+    }
+
+    input[type="radio"]:checked+label[for] {
+      /* 添加选中动画效果 */
+      transform: scale(1.2);
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="首页">民族服饰体验馆</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="user/login">登录</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="contact_us">联系我们</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="jumbotron jumbotron-fluid bg-transparent text-center"
+    style="background-image: url(https://ts1.cn.mm.bing.net/th/id/R-C.63509bb32ec52fad7f32403b3bbb1158?rik=uYfIEAe3MVZBfw&riu=http%3a%2f%2f5b0988e595225.cdn.sohucs.com%2fimages%2f20190604%2f8797db42df134fcc941dfd3698ec771e.jpeg&ehk=hrFNT09cQG5q%2fPn6eMVuAnZvFLvhynxNw6uggnaQ0wA%3d&risl=&pid=ImgRaw&r=0);background-size: contain;margin-bottom: 0%; ">
+    <div class="container">
+      <h1 class="display-4" style="color: white; font-weight:bold">民族服饰体验馆</h1>
+      <p class="lead" style="letter-spacing:3px;font-size: 25px; color: white;">陈灿彬 王拥军</p>
+    </div>
+  </div>
+  <div class="container-fluid" style="background-color: rgba(177, 171, 119, 0.826);">
+    <div class="row">
+      <div class="col-12" style="background-image: url(../static/img/背景图1.jpg);opacity:1">
+        <div class="container">
+          <div class="row">
+            <div class="text-center col-5 border-radius-25" style="height: 30px; ">
+              <p style="font-size: 2pc;color:rgb(0, 0, 0);">换脸前</p>
+            </div>
+            <div class="col-2">
+            </div>
+            <div class="text-center col-5 border-radius-25" style="height: 30px;">
+              <p style="font-size: 2pc; color: rgb(0, 0, 0);">换脸后</p>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-5 text-center border-radius-25"
+              style="background-color: rgba(232, 241, 241, 0.594); height: 400px;z-index: 100; text-align: center;">
+              <form action="/uplord_face" id="form1" method="post" enctype="multipart/form-data">
+                <div class="form-group text-center">
+                  <input type="file" accept=".png,.jpg,.jpeg" id="my-file-selector" name="my-file-selector"
+                    style="height: 25px;">
+                  <img id="my-image" src="" style="height: 300px;color: dark;" alt="Ⅰ.选择你的图片">
+                  <div id="image1"></div>
+                  <br>
+                  <button id="photo_submit" type="button" class="photo_face btn btn-primary">Ⅱ.上传图片</button>
+                </div>
+              </form>
+            </div>
+            <div class="col-2">
+            </div>
+            <div class="col-5 border-radius-25" style="background-color: rgba(239, 245, 245, 0.594);height: 400px;">
+              <div class="container text-center" id="image-container">
+                <div id="image-div">
+                  <br>
+                  <br>
+                  <!-- 在这里加载后端生成的图片，例如： -->
+                  <img src="data:image/jpeg;base64,{{ encodedImage }}" id="image" style="height: 300px; color: dark;"
+                    alt="Ⅳ.图片即将生成">
+                </div>
+                <!-- 创建一个按钮，用于下载图片 -->
+                <button id="download-button" class="btn btn-primary">Ⅴ.下载图片</button>
+              </div>
+            </div>
+          </div>
+          <div class="col-12" style="height: 20px;"></div>
+          <div class="row">
+            <div class="col-12 text-center border-radius-25"
+              style="background-color: rgba(232, 241, 241, 0.594); height: 400px;z-index: 100; text-align: center;">
+              <div style="height: 65px;"></div>
+              <div class="row">
+                <div class="col-1"></div>
+                <div class="col-10 border-radius-25 text-center" style="height: 300px;">
+                  <form action="/merge_face" method="post" id="form2">
+                    <div class="row d-flex align-items-center">
+                      <div class="col-12 text-center d-flex align-items-center"
+                        style="white-space: nowrap; overflow-x: scroll;">
+                        <div>
+                          <input type="radio" id="image-1" name="selected-image" value="han_man.jpg" class="d-none">
+                          <label for="image-1" class="d-inline-block rounded-image" style="height: 250px;">
+                            <img src="../static/img/han_man.jpg" alt="your-image-description"
+                              class="d-inline-block rounded-image" style="height: 250px;"
+                              title="汉服，全称是“汉民族传统服饰”，又称衣冠、衣裳、汉装，是从黄帝即位到公元17世纪中叶（明末清初），在汉族的主要居住区，以“华夏－汉”文化为背景和主导思想，以华夏礼仪文化为中心，通过自然演化而形成的具有独特汉民族风貌性格，明显区别于其他民族的传统服装和配饰体系，是中国“衣冠上国”、“礼仪之邦”、“锦绣中华”的体现，承载了汉族的染织绣等杰出工艺和美学，传承了30多项中国非物质文化遗产以及受保护的中国工艺美术。">
+                          </label>
+                          <input type="radio" id="image-2" name="selected-image" value="han_woman.jpg" class="d-none">
+                          <label for="image-2" class="d-inline-block rounded-image" style="height: 250px;"
+                            title="汉服，全称是“汉民族传统服饰”，又称衣冠、衣裳、汉装，是从黄帝即位到公元17世纪中叶（明末清初），在汉族的主要居住区，以“华夏－汉”文化为背景和主导思想，以华夏礼仪文化为中心，通过自然演化而形成的具有独特汉民族风貌性格，明显区别于其他民族的传统服装和配饰体系，是中国“衣冠上国”、“礼仪之邦”、“锦绣中华”的体现，承载了汉族的染织绣等杰出工艺和美学，传承了30多项中国非物质文化遗产以及受保护的中国工艺美术。">
+                            <img src="../static/img/han_woman.jpg" alt="your-image-description"
+                              class="d-inline-block rounded-image" style="height: 250px;">
+                          </label>
+                          <input type="radio" id="image-3" name="selected-image" value="zang_man.jpg" class="d-none">
+                          <label for="image-3" class="d-inline-block rounded-image" style="height: 250px;">
+                            <img src="../static/img/zang_man.jpg" alt="your-image-description"
+                              class="d-inline-block rounded-image" style="height: 250px;"
+                              title="藏族男性服饰分勒规（劳动服饰）、赘规（礼服）、扎规（武士服）三种；妇女服饰在节庆、生活中的重大事件、仪礼时的服饰变化较大，节日服饰都较平时着装富丽、盛重。藏民族不分男女普遍穿长袍，系腰带。男士们在长袍后摆打褶，女士们在长袍后摆左右两边打褶。也有不分男女一样在长袍后摆的两边打褶的装束习惯。但过去官吏的服饰，以官职的高低有特殊性的象征意义。民间也有称贵人、普通人和平民的详略和优劣等各类型的服饰。">
+                          </label>
+                          <input type="radio" id="image-4" name="selected-image" value="zang_woman.jpg" class="d-none">
+                          <label for="image-4" class="d-inline-block rounded-image" style="height: 250px;">
+                            <img src="../static/img/zang_woman.jpg" alt="your-image-description"
+                              class="d-inline-block rounded-image" style="height: 250px; width: 180px;"
+                              title="藏族男性服饰分勒规（劳动服饰）、赘规（礼服）、扎规（武士服）三种；妇女服饰在节庆、生活中的重大事件、仪礼时的服饰变化较大，节日服饰都较平时着装富丽、盛重。藏民族不分男女普遍穿长袍，系腰带。男士们在长袍后摆打褶，女士们在长袍后摆左右两边打褶。也有不分男女一样在长袍后摆的两边打褶的装束习惯。但过去官吏的服饰，以官职的高低有特殊性的象征意义。民间也有称贵人、普通人和平民的详略和优劣等各类型的服饰。">
+                          </label>
+                          <input type="radio" id="image-5" name="selected-image" value="zhuang_man.jpg" class="d-none">
+                          <label for="image-5" class="d-inline-block rounded-image" style="height: 250px;">
+                            <img src="../static/img/zhuang_man.jpg" alt="your-image-description"
+                              class="d-inline-block rounded-image" style="height: 250px;"
+                              title="壮族妇女擅长纺织和刺绣，所织的壮布和壮锦，均以图案精美和色彩艳丽著称，还有风格别致的“蜡染”也为人们所称道。在服饰上男子比较素，女子则多姿多彩，特别喜欢在鞋、帽、胸兜上用五色丝线绣上花纹，人物、鸟兽、花卉，五花八门，色彩斑斓。以蓝黑色衣裙、衣裤式短装为主。《天下郡国利病书》记载：“壮人花衣短裙，男子着短衫，名曰黎桶，腰前后两幅掩不及膝，妇女也着黎桶，下围花幔。”">
+                          </label>
+                          <input type="radio" id="image-6" name="selected-image" value="zhuang_woman.jpg" class="d-none">
+                          <label for="image-6" class="d-inline-block rounded-image" style="height: 250px;">
+                            <img src="../static/img/zhuang_woman.jpg" alt="your-image-description"
+                              class="d-inline-block rounded-image" style="height: 250px;"
+                              title="壮族妇女擅长纺织和刺绣，所织的壮布和壮锦，均以图案精美和色彩艳丽著称，还有风格别致的“蜡染”也为人们所称道。在服饰上男子比较素，女子则多姿多彩，特别喜欢在鞋、帽、胸兜上用五色丝线绣上花纹，人物、鸟兽、花卉，五花八门，色彩斑斓。以蓝黑色衣裙、衣裤式短装为主。《天下郡国利病书》记载：“壮人花衣短裙，男子着短衫，名曰黎桶，腰前后两幅掩不及膝，妇女也着黎桶，下围花幔。”">
+                          </label>
+                          <input type="radio" id="image-7" name="selected-image" value="menggu_man.jpg" class="d-none">
+                          <label for="image-7" class="d-inline-block rounded-image" style="height: 250px;">
+                            <img src="../static/img/menggu_man.jpg" alt="your-image-description"
+                              class="d-inline-block rounded-image" style="height: 250px;"
+                              title="蒙古族服饰也称为蒙古袍，主要包括长袍、腰带、靴子、首饰等。但因地区不同在式样上有所差异。蒙古族服饰具有浓郁的草原风格特色，以袍服为主，便于鞍马骑乘。因为蒙古族长期生活在塞北草原，蒙古族人民不论男女都爱穿长袍。牧区冬装多为光板皮衣，也有绸缎、棉布衣面者。夏装多布类。长袍身端肥大，袖长，多红、黄、深蓝色。男女长袍下摆均不开衩。红、绿绸缎做腰带。">
+                          </label>
+                          <input type="radio" id="image-8" name="selected-image" value="menggu_woman.jpg" class="d-none">
+                          <label for="image-8" class="d-inline-block rounded-image" style="height: 250px;">
+                            <img src="../static/img/menggu_woman.jpg" alt="your-image-description"
+                              class="d-inline-block rounded-image" style="height: 250px;"
+                              title="蒙古族服饰也称为蒙古袍，主要包括长袍、腰带、靴子、首饰等。但因地区不同在式样上有所差异。蒙古族服饰具有浓郁的草原风格特色，以袍服为主，便于鞍马骑乘。因为蒙古族长期生活在塞北草原，蒙古族人民不论男女都爱穿长袍。牧区冬装多为光板皮衣，也有绸缎、棉布衣面者。夏装多布类。长袍身端肥大，袖长，多红、黄、深蓝色。男女长袍下摆均不开衩。红、绿绸缎做腰带。">
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-12" style="height: 12px;">
+                    </div>
+                    <input type="submit" value="Ⅲ.选择模板" class="btn btn-primary">
+                  </form>
+                </div>
+                <div class="col-1"></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12" style="height: 25px;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"
+    integrity="sha384-LtrjvnR4Twt/qOuYxE721u19sVFLVSA4hf/rRt6PrZTmiPltdZcI7q7PXQBYTKyf" crossorigin="anonymous">
+  </script>
+  <script type="text/javascript" src="/static/js/javascript.js"></script>
+</body>
+
+</html>
